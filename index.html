@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thiệp Mời Kỷ Yếu 12A1</title>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
     body {
       margin: 0;
@@ -12,6 +13,7 @@
       text-align: center;
       padding: 2rem;
       color: #333;
+      overflow-x: hidden;
     }
     .card {
       background: #fff;
@@ -49,5 +51,35 @@
       Made with 💖 by lớp 12A1
     </div>
   </div>
+
+  <script>
+    // Hiệu ứng pháo hoa lúc mở trang
+    function fireConfetti() {
+      var duration = 5 * 1000;
+      var end = Date.now() + duration;
+
+      (function frame() {
+        confetti({
+          particleCount: 3,
+          angle: 60,
+          spread: 55,
+          origin: { x: 0 }
+        });
+        confetti({
+          particleCount: 3,
+          angle: 120,
+          spread: 55,
+          origin: { x: 1 }
+        });
+
+        if (Date.now() < end) {
+          requestAnimationFrame(frame);
+        }
+      })();
+    }
+
+    // Kích hoạt pháo hoa khi trang load
+    window.onload = fireConfetti;
+  </script>
 </body>
 </html>
