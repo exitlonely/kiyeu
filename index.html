@@ -4,82 +4,147 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Thiệp Mời Kỷ Yếu 12A1</title>
-  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <style>
-    body {
+    html, body {
       margin: 0;
+      padding: 0;
+      height: 100%;
       font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #fddde6, #ffffff);
+      overflow: hidden;
+    }
+
+    body {
+      background: url('https://imgur.com/a/qbxTl3L') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
       text-align: center;
-      padding: 2rem;
-      color: #333;
-      overflow-x: hidden;
+      padding-top: 60px;
     }
+
     .card {
-      background: #fff;
-      border-radius: 1rem;
+      background: rgba(0, 0, 0, 0.6);
       padding: 2rem;
+      border-radius: 1rem;
+      width: 90%;
       max-width: 500px;
-      margin: 2rem auto;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      margin: auto;
+      z-index: 1;
+      position: relative;
     }
-    h1 {
-      color: #d63384;
+
+    input {
+      padding: 10px;
+      width: 80%;
+      margin-top: 10px;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
     }
-    .info {
-      margin: 1rem 0;
+
+    .btn {
+      margin-top: 16px;
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
     }
-    .footer {
-      margin-top: 2rem;
-      font-size: 0.9rem;
-      color: #888;
+
+    canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 0;
     }
   </style>
 </head>
 <body>
+  <canvas id="snow"></canvas>
+
   <div class="card">
     <h1>💌 Thiệp Mời Kỷ Yếu 12A1</h1>
-    <div class="info">
-      <p><strong>Thời gian:</strong> 9:00 sáng, Chủ nhật, 14/04/2025</p>
-      <p><strong>Địa điểm:</strong> Trường THPT ABC, Hội trường lớn</p>
-    </div>
-    <p>
-      Thân mời quý thầy cô và các bạn học sinh lớp 12A1 cùng tham dự buổi lễ kỷ yếu để lưu giữ những khoảnh khắc đáng nhớ của thời học trò 💖
-    </p>
-    <p>Rất mong sự hiện diện của mọi người!</p>
-    <div class="footer">
-      Made with 💖 by lớp 12A1
-    </div>
+    <p><strong>Thời gian:</strong> 9:00 sáng, Chủ nhật, 14/04/2025</p>
+    <p><strong>Địa điểm:</strong> Trường THPT ABC</p>
+    <p>Mời bạn đến dự buổi lễ kỷ yếu lớp 12A1 thân thương 💖</p>
+    <input type="text" id="nameInput" placeholder="Nhập tên của bạn..." />
+    <br />
+    <button class="btn" onclick="handleConfirm()">Xác nhận tham dự</button>
   </div>
 
   <script>
-    // Hiệu ứng pháo hoa lúc mở trang
-    function fireConfetti() {
-      var duration = 5 * 1000;
-      var end = Date.now() + duration;
-
-      (function frame() {
-        confetti({
-          particleCount: 3,
-          angle: 60,
-          spread: 55,
-          origin: { x: 0 }
-        });
-        confetti({
-          particleCount: 3,
-          angle: 120,
-          spread: 55,
-          origin: { x: 1 }
-        });
-
-        if (Date.now() < end) {
-          requestAnimationFrame(frame);
-        }
-      })();
+    // Xác nhận tên
+    function handleConfirm() {
+      const name = document.getElementById("nameInput").value.trim();
+      if (!name) {
+        alert("Vui lòng nhập tên trước khi xác nhận!");
+        return;
+      }
+      alert(`❄️ Cảm ơn ${name} đã xác nhận tham dự!`);
     }
 
-    // Kích hoạt pháo hoa khi trang load
-    window.onload = fireConfetti;
+    // Hiệu ứng tuyết rơi đơn giản
+    const canvas = document.getElementById('snow');
+    const ctx = canvas.getContext('2d');
+
+    let w = window.innerWidth;
+    let h = window.innerHeight;
+    canvas.width = w;
+    canvas.height = h;
+
+    let snowflakes = [];
+
+    function createSnowflakes() {
+      for (let i = 0; i < 100; i++) {
+        snowflakes.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          r: Math.random() * 4 + 1,
+          d: Math.random() * 2
+        });
+      }
+    }
+
+    function drawSnowflakes() {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "white";
+      ctx.beginPath();
+      for (let i = 0; i < snowflakes.length; i++) {
+        let f = snowflakes[i];
+        ctx.moveTo(f.x, f.y);
+        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
+      }
+      ctx.fill();
+      moveSnowflakes();
+    }
+
+    let angle = 0;
+
+    function moveSnowflakes() {
+      angle += 0.01;
+      for (let i = 0; i < snowflakes.length; i++) {
+        let f = snowflakes[i];
+        f.y += Math.cos(angle + f.d) + 1 + f.r / 2;
+        f.x += Math.sin(angle) * 2;
+
+        if (f.y > h) {
+          snowflakes[i] = { x: Math.random() * w, y: 0, r: f.r, d: f.d };
+        }
+      }
+    }
+
+    createSnowflakes();
+    setInterval(drawSnowflakes, 30);
+
+    window.addEventListener('resize', () => {
+      w = window.innerWidth;
+      h = window.innerHeight;
+      canvas.width = w;
+      canvas.height = h;
+    });
   </script>
 </body>
 </html>
