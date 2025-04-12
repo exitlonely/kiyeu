@@ -10,7 +10,7 @@
     body {
         margin: 0;
         padding: 0;
-        height: 100vh; 
+        height: 100vh;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -151,7 +151,7 @@
 
     <div class="header">YOU ARE INVITED TO</div>
     <div class="title">Manh Quan's Yearbook</div>
-    <div class="greeting">Dear: <span class="name">Tien Khoi</span></div>
+    <div class="greeting">Dear: <span class="name" id="guestName">Tien Khoi</span></div>
     <div class="greeting">I'm glad to invite you to my yearbook</div>
     <!-- Biểu tượng ngày tháng -->
     <div class="date-badge">
@@ -163,5 +163,17 @@
     <div class="time">10.00 AM - 11.00 PM</div>
     <div class="school">Trường THPT chuyên Phan Bội Châu</div>
     </div>
+    <script>
+        // Hàm lấy tên từ URL
+        function getNameFromURL() {
+          const params = new URLSearchParams(window.location.search);
+          const name = params.get("name");
+          if (name) {
+            document.getElementById("guestName").textContent = decodeURIComponent(name);
+          }
+        }
+      
+        window.onload = getNameFromURL;
+    </script>
     </body>
 </html>
