@@ -1,158 +1,167 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Thiệp Mời Kỷ Yếu 12A1</title>
-  <style>
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thiệp Mời Kỷ Yếu</title>
+    <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
 
     body {
-      background: url('image/nen_test.png') no-repeat center center fixed;
-      background-color: #005;
-      background-size: cover;
-      color: #fff;
-      text-align: center;
-      padding-top: 60px;
-    }
-  
-    .card {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 2rem;
-      border-radius: 1rem;
-      width: 90%;
-      max-width: 500px;
-      margin: auto;
-      z-index: 1;
-      position: relative;
+        margin: 0;
+        padding: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Montserrat', sans-serif;
+        background-color: #f8f3ed;
+        color: #333;
     }
 
-    input {
-      padding: 10px;
-      width: 80%;
-      margin-top: 10px;
-      border: none;
-      border-radius: 6px;
-      font-size: 16px;
+    .yearbook-card {
+        width: 90%;
+        max-width: 500px;
+        background: white;
+        border-radius: 20px;
+        padding: 40px;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        /* THÊM ẢNH NỀN VÀO ĐÂY */
+        background-image: url('Mạnh Quân.jpg');
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        
+        /* Làm mờ nền để chữ dễ đọc hơn */
+        background-color: rgba(255, 255, 255, 0.8);
+        background-blend-mode: overlay;
     }
 
-    .btn {
-      margin-top: 16px;
-      background-color: #e91e63;
-      color: white;
-      border: none;
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 16px;
-      cursor: pointer;
-      transition: 0.3s;
+    .header {
+        font-size: 24px;
+        font-weight: 600;
+        margin-bottom: 10px;
+        color: #d14d72;
+        letter-spacing: 1px;
     }
 
-    canvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      pointer-events: none;
-      z-index: 0;
-    }
-  </style>
-</head>
-<body>
-
-    <!-- 🎵 Nhạc nền -->
-  <audio id="bgMusic" autoplay loop>
-    <source src="https://www.bensound.com/bensound-music/bensound-love.mp3" type="audio/mp3">
-    Trình duyệt của bạn không hỗ trợ phát nhạc.
-  </audio>
-  
-  <canvas id="snow"></canvas>
-
-  <div class="card">
-    <h1>💌 Thiệp Mời Kỷ Yếu 12A1</h1>
-    <p><strong>Thời gian:</strong> 9:00 sáng, Chủ nhật, 14/04/2025</p>
-    <p><strong>Địa điểm:</strong> Trường THPT ABC</p>
-    <p>Mời bạn đến dự buổi lễ kỷ yếu lớp 12A1 thân thương 💖</p>
-    <input type="text" id="nameInput" placeholder="Nhập tên của bạn..." />
-    <br />
-    <button class="btn" onclick="handleConfirm()">Xác nhận tham dự</button>
-  </div>
-
-  <script>
-    // Xác nhận tên
-    function handleConfirm() {
-      const name = document.getElementById("nameInput").value.trim();
-      if (!name) {
-        alert("Vui lòng nhập tên trước khi xác nhận!");
-        return;
-      }
-      alert(`❄️ Cảm ơn ${name} đã xác nhận tham dự!`);
+    .title {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 5px 0 20px;
+        color: #222;
     }
 
-    // Hiệu ứng tuyết rơi đơn giản
-    const canvas = document.getElementById('snow');
-    const ctx = canvas.getContext('2d');
-
-    let w = window.innerWidth;
-    let h = window.innerHeight;
-    canvas.width = w;
-    canvas.height = h;
-
-    let snowflakes = [];
-
-    function createSnowflakes() {
-      for (let i = 0; i < 100; i++) {
-        snowflakes.push({
-          x: Math.random() * w,
-          y: Math.random() * h,
-          r: Math.random() * 4 + 1,
-          d: Math.random() * 2
-        });
-      }
+    .greeting {
+        font-size: 18px;
+        margin: 15px 0;
+        color: #555;
+        line-height: 1.6;
     }
 
-    function drawSnowflakes() {
-      ctx.clearRect(0, 0, w, h);
-      ctx.fillStyle = "white";
-      ctx.beginPath();
-      for (let i = 0; i < snowflakes.length; i++) {
-        let f = snowflakes[i];
-        ctx.moveTo(f.x, f.y);
-        ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2, true);
-      }
-      ctx.fill();
-      moveSnowflakes();
+    .name {
+        font-size: 22px;
+        font-weight: 600;
+        margin: 20px 0;
+        color: #d14d72;
     }
 
-    let angle = 0;
-
-    function moveSnowflakes() {
-      angle += 0.01;
-      for (let i = 0; i < snowflakes.length; i++) {
-        let f = snowflakes[i];
-        f.y += Math.cos(angle + f.d) + 1 + f.r / 2;
-        f.x += Math.sin(angle) * 2;
-
-        if (f.y > h) {
-          snowflakes[i] = { x: Math.random() * w, y: 0, r: f.r, d: f.d };
-        }
-      }
+    /* Biểu tượng ngày tháng */
+    .date-badge {
+        width: 140px;
+        height: 140px;
+        background: #d14d72;
+        border-radius: 50%;
+        margin: 25px auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        position: relative;
+        box-shadow: 0 10px 30px rgba(209, 77, 114, 0.3);
     }
 
-    createSnowflakes();
-    setInterval(drawSnowflakes, 30);
+    .day {
+        font-size: 42px;
+        font-weight: 700;
+        line-height: 1;
+        margin-bottom: 5px;
+    }
 
-    window.addEventListener('resize', () => {
-      w = window.innerWidth;
-      h = window.innerHeight;
-      canvas.width = w;
-      canvas.height = h;
-    });
-  </script>
-</body>
+    .month {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 5px 0;
+        text-transform: uppercase;
+    }
+
+    .year {
+        font-size: 16px;
+        font-weight: 400;
+        margin-top: 5px;
+    }
+
+    .time {
+        font-size: 18px;
+        margin: 15px 0;
+        font-weight: 600;
+        color: #d14d72;
+    }
+
+    .school {
+        font-size: 18px;
+        margin-top: 25px;
+        font-weight: 600;
+        color: #333;
+        padding-top: 15px;
+        border-top: 1px dashed #ddd;
+    }
+
+    /* Hiệu ứng trang trí */
+    .decoration {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        background: rgba(209, 77, 114, 0.1);
+        border-radius: 50%;
+    }
+
+    .decoration-1 {
+        top: -30px;
+        right: -30px;
+    }
+
+    .decoration-2 {
+        bottom: -20px;
+        left: -20px;
+        width: 80px;
+        height: 80px;
+    }
+    </style>
+    </head>
+    <body>
+    <div class="yearbook-card">
+    <!-- Trang trí -->
+    <div class="decoration decoration-1"></div>
+    <div class="decoration decoration-2"></div>
+
+    <div class="header">YOU ARE INVITED TO</div>
+    <div class="title">Manh Quan's Yearbook</div>
+    <div class="greeting">Dear: <span class="name">Tien Khoi</span></div>
+    <div class="greeting">I'm glad to invite you to my yearbook</div>
+    <!-- Biểu tượng ngày tháng -->
+    <div class="date-badge">
+        <div class="day">20</div>
+        <div class="month">SUN • APR</div>
+        <div class="year">2025</div>
+    </div>
+
+    <div class="time">10.00 AM - 11.00 PM</div>
+    <div class="school">Trường THPT chuyên Phan Bội Châu</div>
+    </div>
+    </body>
 </html>
