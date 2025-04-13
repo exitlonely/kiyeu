@@ -1,167 +1,232 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Thiệp Mời Kỷ Yếu</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thiệp Mời Kỷ Yếu - Phong Cách Vintage</title>
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap');
-
-    body {
-        margin: 0;
-        padding: 0;
-        height: 100vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        font-family: 'Montserrat', sans-serif;
-        background-color: #f8f3ed;
-        color: #333;
-    }
-
-    .yearbook-card {
-        width: 90%;
-        max-width: 500px;
-        background: white;
-        border-radius: 20px;
-        padding: 40px;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        /* THÊM ẢNH NỀN VÀO ĐÂY */
-        background-image: url('image/nen_test.jpg');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Cinzel:wght@400;700&display=swap');
         
-        /* Làm mờ nền để chữ dễ đọc hơn */
-        background-color: rgba(255, 255, 255, 0.8);
-        background-blend-mode: overlay;
-    }
+        :root {
+            --primary-color: #8b5a2b;
+            --secondary-color: #5d4037;
+            --text-color: #3e2723;
+            --light-text: #5d4037;
+            --paper-color: #f5e9d9;
+            --card-bg: rgba(245, 233, 217, 0.9);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Playfair Display', serif;
+            color: var(--text-color);
+            padding: 20px;
+            background: url('MQ.jpg') center/cover no-repeat fixed;
+            position: relative;
+            overflow: hidden;
+        }
 
-    .header {
-        font-size: 24px;
-        font-weight: 600;
-        margin-bottom: 10px;
-        color: #d14d72;
-        letter-spacing: 1px;
-    }
+        /* Hiệu ứng giấy cũ */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                linear-gradient(rgba(139, 90, 43, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 90, 43, 0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
+            opacity: 0.5;
+        }
 
-    .title {
-        font-size: 28px;
-        font-weight: 700;
-        margin: 5px 0 20px;
-        color: #222;
-    }
+        /* Hiệu ứng rách giấy ở góc */
+        .yearbook-card {
+            width: 100%;
+            max-width: 500px;
+            background: var(--card-bg);
+            border-radius: 2px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid var(--primary-color);
+            background-image: 
+                linear-gradient(var(--paper-color) 1.1px, transparent 1.1px),
+                linear-gradient(90deg, var(--paper-color) 1.1px, transparent 1.1px);
+            background-size: 40px 40px;
+            background-position: -20px -20px;
+        }
 
-    .greeting {
-        font-size: 18px;
-        margin: 15px 0;
-        color: #555;
-        line-height: 1.6;
-    }
+        .yearbook-card::before,
+        .yearbook-card::after {
+            content: '';
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-size: contain;
+            background-repeat: no-repeat;
+            z-index: 1;
+        }
 
-    .name {
-        font-size: 22px;
-        font-weight: 600;
-        margin: 20px 0;
-        color: #d14d72;
-    }
+        .yearbook-card::before {
+            top: -10px;
+            right: -10px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M100,0 L100,40 C70,30 50,50 30,40 L0,0 Z" fill="%23f5e9d9"/></svg>');
+            transform: rotate(90deg);
+        }
 
-    /* Biểu tượng ngày tháng */
-    .date-badge {
-        width: 140px;
-        height: 140px;
-        background: #d14d72;
-        border-radius: 50%;
-        margin: 25px auto;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        color: white;
-        position: relative;
-        box-shadow: 0 10px 30px rgba(209, 77, 114, 0.3);
-    }
+        .yearbook-card::after {
+            bottom: -10px;
+            left: -10px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M0,100 L0,60 C30,70 50,50 70,60 L100,100 Z" fill="%23f5e9d9"/></svg>');
+        }
 
-    .day {
-        font-size: 42px;
-        font-weight: 700;
-        line-height: 1;
-        margin-bottom: 5px;
-    }
+        /* Hiệu ứng vết ố trên giấy */
+        .stain {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(139, 90, 43, 0.1);
+            filter: blur(2px);
+            z-index: -1;
+        }
 
-    .month {
-        font-size: 18px;
-        font-weight: 600;
-        margin: 5px 0;
-        text-transform: uppercase;
-    }
+        .header {
+            font-size: clamp(1.25rem, 3vw, 1.5rem);
+            font-weight: 700;
+            margin-bottom: 0.625rem;
+            color: var(--primary-color);
+            letter-spacing: 2px;
+            font-family: 'Cinzel', serif;
+            text-transform: uppercase;
+        }
+        
+        .title {
+            font-size: clamp(1.5rem, 4vw, 1.75rem);
+            font-weight: 700;
+            margin: 0.3125rem 0 1.25rem;
+            color: var(--text-color);
+            font-family: 'Cinzel', serif;
+        }
+        
+        .greeting {
+            font-size: 1rem;
+            margin: 0.9375rem 0;
+            color: var(--light-text);
+            line-height: 1.6;
+            font-style: italic;
+        }
+        
+        .name {
+            font-size: 1.375rem;
+            font-weight: 700;
+            margin: 1.25rem 0;
+            color: var(--primary-color);
+            text-decoration: underline;
+            text-decoration-color: var(--secondary-color);
+            text-decoration-thickness: 1px;
+        }
 
-    .year {
-        font-size: 16px;
-        font-weight: 400;
-        margin-top: 5px;
-    }
+        .date-badge {
+            width: 8.75rem;
+            height: 8.75rem;
+            background: var(--primary-color);
+            border-radius: 50%;
+            margin: 1.5625rem auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            color: var(--paper-color);
+            position: relative;
+            box-shadow: 0 5px 15px rgba(93, 64, 55, 0.4);
+            border: 3px double var(--paper-color);
+        }
 
-    .time {
-        font-size: 18px;
-        margin: 15px 0;
-        font-weight: 600;
-        color: #d14d72;
-    }
+        /* Hiệu ứng con dấu */
+        .date-badge::before {
+            content: '';
+            position: absolute;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 1px dashed var(--paper-color);
+            border-radius: 50%;
+            opacity: 0.5;
+        }
 
-    .school {
-        font-size: 18px;
-        margin-top: 25px;
-        font-weight: 600;
-        color: #333;
-        padding-top: 15px;
-        border-top: 1px dashed #ddd;
-    }
-
-    /* Hiệu ứng trang trí */
-    .decoration {
-        position: absolute;
-        width: 100px;
-        height: 100px;
-        background: rgba(209, 77, 114, 0.1);
-        border-radius: 50%;
-    }
-
-    .decoration-1 {
-        top: -30px;
-        right: -30px;
-    }
-
-    .decoration-2 {
-        bottom: -20px;
-        left: -20px;
-        width: 80px;
-        height: 80px;
-    }
+        .day {
+            font-size: 2.625rem;
+            font-weight: 700;
+            line-height: 1;
+            margin-bottom: 0.3125rem;
+        }
+        
+        .month {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0.3125rem 0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .year {
+            font-size: 1rem;
+            font-weight: 400;
+            margin-top: 0.3125rem;
+            font-family: 'Cinzel', serif;
+        }
+        
+        .time {
+            font-size: 1.125rem;
+            margin: 0.9375rem 0;
+            font-weight: 600;
+            color: var(--primary-color);
+            letter-spacing: 1px;
+        }
+        
+        .school {
+            font-size: 1.125rem;
+            margin-top: 1.5625rem;
+            font-weight: 600;
+            padding-top: 0.9375rem;
+            border-top: 1px dashed var(--primary-color);
+            font-family: 'Cinzel', serif;
+        }
     </style>
-    </head>
-    <body>
+</head>
+<body>
+    <!-- Vết ố trên giấy -->
+    <div class="stain" style="width: 150px; height: 150px; top: 10%; left: 10%;"></div>
+    <div class="stain" style="width: 100px; height: 100px; bottom: 15%; right: 15%;"></div>
+    <div class="stain" style="width: 80px; height: 80px; top: 60%; left: 20%;"></div>
+
     <div class="yearbook-card">
-    <!-- Trang trí -->
-    <div class="decoration decoration-1"></div>
-    <div class="decoration decoration-2"></div>
+        <div class="header">YOU ARE INVITED TO</div>
+        <div class="title">Manh Quan's Yearbook</div>
+        <div class="greeting">Dear: <span class="name" id="guestName"></span></div>
+        <div class="greeting">I'm glad to invite you to my yearbook</div>
+        
+        <div class="date-badge">
+            <div class="day">20</div>
+            <div class="month">SUN • APR</div>
+            <div class="year">2025</div>
+        </div>
 
-    <div class="header">YOU ARE INVITED TO</div>
-    <div class="title">Manh Quan's Yearbook</div>
-    <div class="greeting">Dear: <span class="name" id="guestName">Tien Khoi</span></div>
-    <div class="greeting">I'm glad to invite you to my yearbook</div>
-    <!-- Biểu tượng ngày tháng -->
-    <div class="date-badge">
-        <div class="day">20</div>
-        <div class="month">SUN • APR</div>
-        <div class="year">2025</div>
-    </div>
-
-    <div class="time">10.00 AM - 11.00 PM</div>
-    <div class="school">Trường THPT chuyên Phan Bội Châu</div>
+        <div class="time">10.00 AM - 12.00 PM</div>
+        <div class="school">Trường THPT chuyên Phan Bội Châu</div>
     </div>
     <script>
         // Hàm lấy tên từ URL
@@ -175,5 +240,5 @@
       
         window.onload = getNameFromURL;
     </script>
-    </body>
+</body>
 </html>
